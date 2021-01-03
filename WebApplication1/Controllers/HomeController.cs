@@ -18,9 +18,10 @@ namespace WebApplication1.Controllers
         {
             _logger = logger;
         }
-
+        //[Authorize]
         public IActionResult Index()
         {
+            
             return View();
         }
         //[Authorize]

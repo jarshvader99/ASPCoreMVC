@@ -44,6 +44,7 @@ namespace WebApplication1
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddSignalR();
 
             services.Configure<IdentityOptions>(options =>
             {

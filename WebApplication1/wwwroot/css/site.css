@@ -69,3 +69,36 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+#searchIcon {
+    position: relative;
+    top: 1rem;
+    left: 2rem;
+    color: #FFF;
+    cursor:pointer;
+}
+
+.clear-results {
+    position: relative;
+    top: 1rem;
+    right: 2rem;
+    cursor:pointer;
+}
+.clear-results:hover {
+    color:#ff0000;
+}
+
+#restaurants {
+    border: none !important;
+}
+
+.search-icon {
+    color: #bebebe5e;
+}
+
+.selected {
+    color: orange;
+
+}
+
+
