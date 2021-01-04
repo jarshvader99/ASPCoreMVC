@@ -10,6 +10,7 @@ a.navbar-brand {
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -98,6 +99,19 @@ body {
 
 .selected {
     color: orange;
+
+}
+
+.card-footer {
+    color: rgba(0, 0, 0, 0.03);
+}
+
+.hidden {
+    display:none;
+}
+
+#price {
+    cursor: pointer;
 
 }
 
