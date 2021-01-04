@@ -166,6 +166,13 @@ $("#btnSearch").click(function () {
                         var price = data.restaurants[i].restaurant.price_range;
                         price = calcPrice(price);                                             
                     }
+                    if (data.restaurants[i].restaurant.location.latitude && data.restaurants[i].restaurant.location.longitude) {
+                        var lat1 = latitude;
+                        var lon1 = longitude;
+                        var lat2 = data.restaurants[i].restaurant.location.latitude;
+                        var lon2 = data.restaurants[i].restaurant.location.longitude;
+                        var dist = calcDistance(lat1, lon1, lat2, lon2, "M"); 
+                    }
                    
                     restaurants.append(
                         '<h3 class="card-header"><a class="restaurant-details" id="' + data.restaurants[i].restaurant.id + '" data-toggle="modal" data-target="#resDetailModal">' + data.restaurants[i].restaurant.name + '</a></h3>' +
@@ -181,13 +188,12 @@ $("#btnSearch").click(function () {
                         '</svg>' +
                         '<div class="card-body">' +
                         '<p class="card-text">' + data.restaurants[i].restaurant.highlights + '</p>' +
-                        '</div>' +
-                        
-                        '<div class="card-body">' +
-                        '<a href="' + data.restaurants[i].restaurant.menu_url + '" class="card-link" target="_blank">View Menu</a>' +
-                        '</div>' +
-                        '<div class="card-footer mb-5">' +
+                        '</div>' +                      
+                        '<div class="card-footer-h">' +
                         i +
+                        '</div>' +
+                        '<div class="card-footer mb-5"><i class="fas fa-map-signs"></i> ' +
+                            dist + ' Miles' +
                         '</div>');
                     i++;
                 });
@@ -202,11 +208,11 @@ $("#btnSearch").click(function () {
 });
 
 $("#viewNext").click(function () {
-    var start = $('.card-footer:last').text();
+    var start = $('.card-footer-h:last').text();
     start = parseInt(start);
     start++;
     var count = 20;
-    var index = $('.card-footer:last').text();
+    var index = $('.card-footer-h:last').text();
     index = parseInt(index);
     index++;
     var q = $('#searchInput').val();
@@ -277,9 +283,11 @@ $("#viewNext").click(function () {
 
 $(document).on("click", ".restaurant-details", function (e) {
     var resId = $(this).attr('id');
+    console.log($(this).val());
     var title = $('#modal-title');
     var businessDetails = $('#business-details');
     var thumb = $('#thumb');
+    var footer = $('.modal-footer-details');
     $.ajax({
         type: 'GET',
         url: 'https://developers.zomato.com/api/v2.1/restaurant?res_id=' + resId + '&apikey=8e433de61020f20ecdcc1389db0f22a4',
@@ -287,19 +295,54 @@ $(document).on("click", ".restaurant-details", function (e) {
         success: function (data) {
             title.empty();
             businessDetails.empty();
-            thumb.empty();  
+            thumb.empty(); 
+            footer.empty();
             title.append(data.name);
             businessDetails.append(
                 '<ul class="list-group list-group-flush">' +
                 '<li class="list-group-item"><i class="fas fa-location-arrow"></i> ' + data.location.address + '</li>' +
                 '<li class="list-group-item"><i class="fas fa-cocktail"></i> ' + data.timings + '</li>' +
                 '<li class="list-group-item"><i class="fas fa-phone-square"></i> ' + data.phone_numbers + '</li>' +
+                '<li class="list-group-item"><i class="fas fa-book-reader"></i><a href="' + data.menu_url + '" class="card-link" target="_blank"> View Menu</a></li>' +
                 '</ul>'
             );
-            thumb.append('<img src="' + data.featured_image + '"/>')
-            $("#resDetailModal").modal('show');
+            thumb.append('<img src="' + data.featured_image + '"/>');
+            footer.append('<a class="get-reviews" id="' + data.id + '">Reviews</a>');
         }
     });
+    $("#resDetailModal").modal('show');     
+});
+
+$(document).on("click", ".get-reviews", function (e) {
+    $("#resDetailModal").modal('hide');  
+    var resId = $(this).attr('id');
+    var reviews = $('#restaurant-reviews');
+    reviews.empty();
+    var thumb = $('#thumb');
+    var i = 0;
+    $.ajax({
+        type: 'GET',
+        url: 'https://developers.zomato.com/api/v2.1/reviews?res_id=' + resId + '&apikey=8e433de61020f20ecdcc1389db0f22a4',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data.user_reviews, function (key, val) {
+                thumb.empty();
+                console.log('success');
+                console.log(data.user_reviews[i]);
+                reviews.append(
+                    '<div class="card border-primary mb-3">' +
+                    '<div class="card-header">Rating: ' + data.user_reviews[i].review.rating + '</div>' +
+                        '<div class="card-body">' +
+                            '<h6 class="text-muted">Date: ' + data.user_reviews[i].review.review_time_friendly + '</h6>' +
+                            '<h6 class="text-muted">Author: ' + data.user_reviews[i].review.user.name + '</h6>' +
+                            '<p class="card-text">' + data.user_reviews[i].review.review_text + '</p > ' +
+                    '</div>' +
+                    '</div>');
+                i++;
+            });        
+        }
+    });
+    $("#resReviewModal").modal('show');
 });
 
 function calcPrice(price) {
@@ -325,4 +368,19 @@ function calcPrice(price) {
             price = "$";
     } 
     return price;
+}
+
+function calcDistance(lat1, lon1, lat2, lon2, unit) {
+    var radlat1 = Math.PI * lat1 / 180;
+    var radlat2 = Math.PI * lat2 / 180;
+    var theta = lon1 - lon2;
+    var radtheta = Math.PI * theta / 180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist);
+    dist = dist * 180 / Math.PI;
+    dist = dist * 60 * 1.1515;
+    if (unit == "K") { dist = dist * 1.609344; }
+    if (unit == "N") { dist = dist * 0.8684; }
+    if (unit == "M") { dist = dist.toFixed(2); }
+    return dist;
 }

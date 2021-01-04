@@ -9,5 +9,6 @@ namespace WebApplication1.Services
     {
         public string SendGridUser { get; set; }
         public string SendGridKey { get; set; }
+        public string ZomatoApiKey { get; set; }
     }
 }
