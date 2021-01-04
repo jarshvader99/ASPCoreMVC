@@ -32,6 +32,47 @@ function getCityFromLatAndLon(latitude, longitude) {
     });
 }
 
+$(document).ready(function () {
+    $('.icon-wrapper').hide();
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(latsAndLons);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    function latsAndLons(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var neighborhood = $('#neighborhood');
+        $.ajax({
+            type: 'GET',
+            url: 'https://developers.zomato.com/api/v2.1/collections?q=' + '&lat=' + latitude + '&lon=' + longitude + '&apikey=8e433de61020f20ecdcc1389db0f22a4',
+            dataType: 'json',
+            data: JSON.stringify(),
+            success: function (data) {
+                neighborhood.empty();
+                var i = 0;
+                $.each(data.collections, function (key, val) {
+                    
+                    neighborhood.append(
+                        '<h3 class="card-header"><a href="' + data.collections[i].collection.url + '" target="_blank">' + data.collections[i].collection.title + '</a></h3>' +
+                        '<div class="card-body">' +
+                        '<a href="' + data.collections[i].collection.url + '" target="_blank"><img id="collections-image" src="' + data.collections[i].collection.image_url + '"/></a>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        '<p class="card-text"><a href="' + data.collections[i].collection.url + '" target="_blank">' + data.collections[i].collection.description + '</a></p>' +
+                        '</div>' +
+                        '<div class="card-footer-h">' +
+                        '</div>' +
+                        '<div class="card-footer mb-5">' +
+                        
+                        '</div>');
+                    i++;
+                });
+            }
+        });
+    }
+});
+
 $("#btnSearchCities").click(function () {
     var city = $('#searchCityInput').val();
     var ulCities = $('#ulCities');
@@ -109,12 +150,15 @@ $("#btnGetNearby").click(function () {
 
 $(".clear-results").click(function () {
     var restaurants = $('#restaurants');
+    var nextBtn = $('.next-button');
+    nextBtn.empty();
     restaurants.empty();
     restaurants.append('<div class="icon-wrapper d-flex justify-content-center align-items-center">' +
         '<i class= "fas fa-utensils fa-9x search-icon" ></i>' +
         '</div>');
     $('#searchInput').val('');
     $('#viewNext').toggleClass('hidden');
+    $('#neighborhood').show();
 });
 
 $(".asc").click(function () {
@@ -127,9 +171,9 @@ $(".dsc").click(function () {
     $('.asc').removeClass('selected');
 });
 
-$("#btnSearch").click(function () {
-    
+$("#btnSearch").click(function () {   
     var q = $('#searchInput').val();
+    $('#neighborhood').hide();
     $('.icon-wrapper').hide();
     var distance = $('#distance').val();
     var sort = $('#sort').val();
@@ -319,6 +363,8 @@ $(document).on("click", ".get-reviews", function (e) {
     var reviews = $('#restaurant-reviews');
     reviews.empty();
     var thumb = $('#thumb');
+    var backToRes = $('#back-to-restaurant');
+    backToRes.empty();
     var i = 0;
     $.ajax({
         type: 'GET',
@@ -342,7 +388,13 @@ $(document).on("click", ".get-reviews", function (e) {
             });        
         }
     });
+    backToRes.append('<a id="back">Back</a>');
     $("#resReviewModal").modal('show');
+});
+
+$(document).on("click", "#back", function (e) {
+    $("#resReviewModal").modal('hide');
+    $("#resDetailModal").modal('show');
 });
 
 function calcPrice(price) {
