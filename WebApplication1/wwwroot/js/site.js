@@ -102,7 +102,8 @@ $("#load-more-search").click(function () {
                         '<p class="text-left"><i class="fa fa-hourglass-1"></i> ' + response.restaurants[i].restaurant.timings + '</p>' +
                         '<p class="text-left"><i class="fa fa-phone"></i> ' + response.restaurants[i].restaurant.phone_numbers + '</p>' +
                         '<p class="text-left"><i class="fa fa-address-book"></i> ' + response.restaurants[i].restaurant.location.address + '</p>' +
-                        '<p class="text-left"><i class=" fa fa-map-signs"></i> ' + response.restaurants[i].restaurant.location.city + '</p>')
+                        '<p class="text-left"><i class=" fa fa-map-signs"></i> ' + response.restaurants[i].restaurant.location.city + '</p>' +
+                        '<p class="text-left"><i class=" fas fa-comments"></i> <a href="/Reviews?res_id=' + response.restaurants[i].restaurant.id + '">Reviews</a></p>')
                     i++;
                 });
             } else {

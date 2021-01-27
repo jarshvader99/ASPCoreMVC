@@ -10,17 +10,58 @@
                         <div class="row">
                             @foreach (var item in Model.best_rated_restaurant)
                             {
-                                <div id="restaurant-card" class="col-lg-12 col-md-12 col-sm-12">
+                                var image = "";
+                                @if (item.restaurant.featured_image != "")
+                                {
+                                    image = item.restaurant.featured_image;
+                                }
+                                else
+                                {
+                                    image = "https://via.placeholder.com/380x253.png?text=Oops!+There+Is+Nothing+Here.";
+                                }
+                                var price = item.restaurant.price_range.ToString();
+                                @switch (price)
+                                {
+                                    case "1":
+                                        // code block
+                                        price = "$";
+                                        break;
+                                    case "2":
+                                        // code block
+                                        price = "$$";
+                                        break;
+                                    case "3":
+                                        // code block
+                                        price = "$$$";
+                                        break;
+                                    case "4":
+                                        // code block
+                                        price = "$$$$";
+                                        break;
+                                    default:
+                                        // code block
+                                        price = "$";
+                                        break;
+                                }
+                                <div id="restaurant-card" class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="categories__post__item">
-                                        <div class="categories__post__item__pic small__item set-bg">
+                                        <div class="categories__post__item__pic small__item set-bg"
+                                             data-setbg=@image>
+                                            <div class="post__meta">
+                                                <span class="rating">Price</span>
+                                                <h4>@price</h4>
+                                                <span class="rating">Rating</span>
+                                                <h4>@item.restaurant.user_rating.aggregate_rating</h4>
+                                            </div>
                                         </div>
                                         <div class="categories__post__item__text">
-                                            <h3>@item.restaurant.name</h3>
-                                            @foreach (var review in item.restaurant.all_reviews)
-                                            {
-                                            <p  class="post__label">@item.restaurant.all_reviews</p>
-
-                                            }
+                                            <h3><a href=@item.restaurant.url>@item.restaurant.name</a></h3>
+                                            <p class="post__label">@item.restaurant.cuisines</p>
+                                            <p class="text-left"><i class="fa fa-hourglass-1"></i> @item.restaurant.timings</p>
+                                            <p class="text-left"><i class="fa fa-phone"></i> @item.restaurant.phone_numbers</p>
+                                            <p class="text-left"><i class="fa fa-address-book"></i> @item.restaurant.location.address</p>
+                                            <p class="text-left"><i class=" fa fa-map-signs"></i> @item.restaurant.location.city</p>
+                                            <p class="text-left"><i class=" fas fa-comments"></i> <a href="/Reviews?res_id=@item.restaurant.id">Reviews</a></p>
                                         </div>
                                     </div>
                                 </div>

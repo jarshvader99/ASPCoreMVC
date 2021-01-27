@@ -60,9 +60,10 @@
                                                 <h3><a href=@item.restaurant.url>@item.restaurant.name</a></h3>
                                                 <p class="post__label">@item.restaurant.cuisines</p>
                                                 <p class="text-left"><i class="fa fa-book"></i> <a href="@item.restaurant.menu_url">Menu</a></p>
-                                                
+
                                                 <p class="text-left"><i class="fa fa-address-book"></i> @item.restaurant.location.address</p>
-                                                <p class="text-left"><i class=" fa fa-map-signs"></i> @item.restaurant.location.city</p>
+                                                <p class="text-left"><i class="fa fa-map-signs"></i> @item.restaurant.location.city</p>
+                                                <p class="text-left"><i class="fas fa-comments"></i> <a href="/Reviews?res_id=@item.restaurant.id">Reviews</a></p>
                                             </div>
                                         </div>
                                     </div>

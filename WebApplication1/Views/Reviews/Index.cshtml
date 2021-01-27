@@ -1,0 +1,61 @@
+﻿@model WebApplication1.Models.Reviews.ReviewsModel;
+
+<section>
+    @if (Model != null)
+    {
+        <div class="categories__post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            @foreach (var item in Model.user_reviews)
+                            {
+                                <div id="restaurant-card" class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="categories__post__item">
+                                        <div class="post__meta mb-3">
+                                            <img class="float-left profile_image img-responsive rounded-circle" src="@item.review.user.profile_image" />
+                                            <div class="float-right user_info">
+                                                <span class="rating">Posted By</span>
+                                                <h5>@item.review.user.name</h5>
+                                                <span class="rating">Date</span>
+                                                <h5>@item.review.review_time_friendly</h5>
+                                                <span class="rating">Likes</span>
+                                                <h5>@item.review.likes</h5>
+                                                <span class="rating">@item.review.user.foodie_level</span>
+                                                <h5>@item.review.user.foodie_level_num</h5>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="categories__post__item__text mt-5">
+                                            <h3 class="text-left">@item.review.review_text</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if(Model.reviews_count == 0)
+    {
+        <div class="categories__post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            <div id="restaurant-card" class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="categories__post__item">
+                                    <div class="categories__post__item__text mt-5">
+                                        <h3 class="text-left">Oops! It seems there isn't anything here...</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>

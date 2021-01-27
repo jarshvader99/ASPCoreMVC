@@ -10,11 +10,11 @@
                 </button>
             </div>
             <div class="modal-body" id="">
-                <p id="">Foodly would like to know your location to show nearby restaurants.</p>
+                <p id="">Foodly would like to know your location to customize your experience.</p>
                 <div id=""></div>
             </div>
             <div class="modal-footer" id="back-to-restaurant">
-                <button id="show-res" class="site-btn">Show Restaurants</button>
+                <button id="show-res" class="site-btn">Share Location</button>
             </div>
         </div>
     </div>
@@ -192,96 +192,3 @@
     </div>
 </section>
 <!-- Hero Section End -->
-
-<div>
-    <div class="p-1 d-flex">
-        <input type="text" id="searchInput" class="form-control justify-content-start" placeholder="Search for eats.."><i class="fas fa-times clear-results"></i>
-        <i id="searchIcon" class='fas fa-search'></i><input id="btnSearch" class="btn btn-info justify-content-end" type="button" value="" />
-    </div>
-    <div class="p-1 d-flex">
-        <fieldset>
-            <div class="form-group">
-                <select id="distance" class="custom-select">
-                    <option value="1610" selected="">- Search Radius -</option>
-                    <option value="1610">1 Mile</option>
-                    <option value="4828">3 Miles</option>
-                    <option value="8046">5 Miles</option>
-                    <option value="16093">10 Miles</option>
-                    <option value="32186">20 Miles</option>
-                </select>
-            </div>
-        </fieldset>
-        <fieldset>
-            <div class="form-group ml-1">
-                <select id="sort" class="custom-select">
-                    <option value="" selected="">- Sort -</option>
-                    <option value="cost">Price</option>
-                    <option value="rating">Rating</option>
-                    <option value="real_distance">Distance</option>
-                </select>
-            </div>
-        </fieldset>
-        <div class="form-group ml-1 d-flex align-items-center">
-            <i class="dsc fas fa-sort-alpha-down fa-2x ml-1 d-flex align-content-center" data-toggle="tooltip" title="Used with Sort"></i>
-            <i class="asc fas fa-sort-alpha-up fa-2x ml-1 d-flex align-content-center" data-toggle="tooltip" title="Used with Sort"></i>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div id="neighborhood" class="card-columns">
-
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div id="restaurants" class="card col-md-4 mb-3 pt-1">
-            <div class="icon-wrapper d-flex justify-content-center align-items-center">
-                <i class="fas fa-utensils fa-9x search-icon"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="next-button">
-    <button id="viewNext" type="button" class="btn btn-outline-primary hidden">More</button>
-</div>
-<div class="modal" id="resDetailModal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="business-details">
-                <p id="thumb"></p>
-            </div>
-            <div class="modal-footer modal-footer-details">
-
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal" id="resReviewModal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="business-details">
-                <p id="thumb"></p>
-                <div id="restaurant-reviews"></div>
-            </div>
-            <div class="modal-footer" id="back-to-restaurant">
-
-            </div>
-        </div>
-    </div>
-</div>
