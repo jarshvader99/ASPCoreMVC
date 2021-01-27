@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -49,6 +50,7 @@ namespace WebApplication1
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddSignalR();
+            services.AddSession();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -69,6 +71,25 @@ namespace WebApplication1
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             });
+
+            //Setup spotify authentication
+            // your callback path must match the redirect URI in spotify console
+            services.AddAuthentication()
+            .AddSpotify(options => {
+                IConfigurationSection spotifyAuthNSection =
+                Configuration.GetSection("Authentication:Spotify");
+
+                options.ClientId = spotifyAuthNSection["ClientId"];
+                options.ClientSecret = spotifyAuthNSection["ClientSecret"];
+                options.CallbackPath = "/callback";
+
+                //options.ClaimActions.MapJsonKey("urn:spotify:id", "string");
+                options.Events.OnRemoteFailure = (context) =>
+                {
+                    // Handle failed login attempts here
+                    return Task.CompletedTask;
+                };
+            }); // end of spotify options
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -103,6 +124,8 @@ namespace WebApplication1
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

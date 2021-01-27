@@ -1,0 +1,40 @@
+﻿@model WebApplication1.Models.Locations.LocationsModel;
+
+<form class="search-model-form" action="/Locations/Search">
+    <input type="text" name="q" id="search-input" placeholder="Search here.....">
+    <input type="submit" />
+</form>
+<section>
+    @if (Model != null)
+    {
+        <div class="categories__post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            @foreach (var item in Model.location_suggestions)
+                            {
+                                <div id="restaurant-card" class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="categories__post__item">
+                                        <div class="categories__post__item__pic small__item set-bg">
+                                        
+                                        </div>
+                                        <div class="categories__post__item__text">
+                                            <h3>@item.city_name, @item.country_name</h3>
+                                            <p class="post__label">@item.title</p>
+                                            <p class="text-left">@item.entity_id</p>
+
+                                            <p class="text-left">@item.entity_type</p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+

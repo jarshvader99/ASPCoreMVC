@@ -1,77 +1,134 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
-var x = document.getElementById("demo");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    getCityFromLatAndLon(position.coords.latitude, position.coords.longitude);
-}
-
-function getCityFromLatAndLon(latitude, longitude) {
-    var ulCities = $('#ulCities');
+//check to see if users location is in session still if not force user to update
+$(window).on('load', function () {
     $.ajax({
         type: 'GET',
-        url: 'https://developers.zomato.com/api/v2.1/cities?lat=' + latitude + '&lon=' + longitude + '&apikey=8e433de61020f20ecdcc1389db0f22a4',
-        dataType: 'json',
-        success: function (data) {
-            ulCities.empty();
-            $.each(data.location_suggestions, function (index, location_suggestions) {
-                if (location_suggestions != undefined) {
-                    ulCities.append('<a href="/getRestaurant/' + location_suggestions.id + '><li id="' + location_suggestions.id + '">' + location_suggestions.name + '</li></a>');
+        url: '/Home/GetUserLocation',
+        success: function (response) {
+            console.log(response);
+            if (response.value != null) {
+                if (response.value == "success") {
+                    $('#locationModal').modal('hide');
                 }
-            });
+                else
+                {
+                    $('#locationModal').modal('show');
+                }
+            } else {
+                alert("Something went wrong");
+            }
+        },
+        failure: function (data) {
+            alert(data.responseText);
+        },
+        error: function (data) {
+            alert(data.responseText);
         }
-    });
-}
 
-$(document).ready(function () {
-    $('.icon-wrapper').hide();
+    });
+});
+// Call to store user location in session
+$("#show-res").click(function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(latsAndLons);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
     function latsAndLons(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        var neighborhood = $('#neighborhood');
         $.ajax({
-            type: 'GET',
-            url: 'https://developers.zomato.com/api/v2.1/collections?q=' + '&lat=' + latitude + '&lon=' + longitude + '&apikey=8e433de61020f20ecdcc1389db0f22a4',
-            dataType: 'json',
-            data: JSON.stringify(),
+            type: 'POST',
+            url: '/Home/StoreUserLocation',
+            data: { 'latitude': position.coords.latitude, 'longitude': position.coords.longitude},
             success: function (data) {
-                neighborhood.empty();
-                var i = 0;
-                $.each(data.collections, function (key, val) {
-                    
-                    neighborhood.append(
-                        '<h3 class="card-header"><a href="' + data.collections[i].collection.url + '" target="_blank">' + data.collections[i].collection.title + '</a></h3>' +
-                        '<div class="card-body">' +
-                        '<a href="' + data.collections[i].collection.url + '" target="_blank"><img id="collections-image" src="' + data.collections[i].collection.image_url + '"/></a>' +
-                        '</div>' +
-                        '<div class="card-body">' +
-                        '<p class="card-text"><a href="' + data.collections[i].collection.url + '" target="_blank">' + data.collections[i].collection.description + '</a></p>' +
-                        '</div>' +
-                        '<div class="card-footer-h">' +
-                        '</div>' +
-                        '<div class="card-footer mb-5">' +
-                        
-                        '</div>');
-                    i++;
-                });
+                if (data != null) {
+                    $('#locationModal').modal('hide');
+                } else {
+                    alert("Something went wrong");
+                }
+            },
+            failure: function (data) {
+                alert(data.responseText);
+            },
+            error: function (data) {
+                alert(data.responseText);
             }
         });
     }
 });
+// Error getting location
+function positionError(position) {
+    alert("Opps! Error: " + postion.code);
+}
+// Call to search more
+$("#load-more-search").click(function () {
+    var q = GetURLParameter('q');
+    var distance = GetURLParameter('distance');
+    var sort = GetURLParameter('sort');
+    var order = GetURLParameter('order');
+    var start = parseInt($('.result-start').data('rs'));
+    var loadMoreSearch = $('.load-more-search');
+    $.ajax({
+        type: 'GET',
+        url: '/Home/SearchMore?=q' + q + '&distance=' + distance + '&sort=' + sort + '&order=' + order + '&start=' + (start + 20),
+        success: function (response) {
+            $('.result-start').data('rs', response.results_start);
+            if (response) {
+                var i = 0;
+                var image = "";
+                if (response.restaurants[i].restaurant.featured_image != "") {
+                    image = response.restaurants[i].featured_image;
+                }
+                else {
+                    image = "https://via.placeholder.com/380x253.png?text=Oops!+There+Is+Nothing+Here.";
+                }
+                $.each(response.restaurants, function (key, val) {
+                    $('.newFromSearch').css('background-image', 'url(' + image + ')');
+                    loadMoreSearch.append(
+                        '<div class="col-lg-6 col-md-6 col-sm-6">' +
+                        '<div class="categories__post__item">' +
+                        '<div class="categories__post__item__pic small__item newFromSearch" style=background-image:("' + image + '")>' +
+                        '<div class="post__meta">' +
+                        '<span class="rating">Price</span>' +
+                        '<h4>' + response.restaurants[i].restaurant.price_range + '</h4>' +
+                        '<span class="rating">Rating</span>' +
+                        '<h4>' + response.restaurants[i].restaurant.user_rating.aggregate_rating + '</h4>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="categories__post__item__text">' +
+                        '<h3><a href=' + response.restaurants[i].restaurant.url + '>' + response.restaurants[i].restaurant.name + '</a></h3>' +
+                        '<p class="post__label">' + response.restaurants[i].restaurant.cuisines + '</p>' +
+                        '<p class="text-left"><i class="fa fa-hourglass-1"></i> ' + response.restaurants[i].restaurant.timings + '</p>' +
+                        '<p class="text-left"><i class="fa fa-phone"></i> ' + response.restaurants[i].restaurant.phone_numbers + '</p>' +
+                        '<p class="text-left"><i class="fa fa-address-book"></i> ' + response.restaurants[i].restaurant.location.address + '</p>' +
+                        '<p class="text-left"><i class=" fa fa-map-signs"></i> ' + response.restaurants[i].restaurant.location.city + '</p>')
+                    i++;
+                });
+            } else {
+                alert("Something went wrong");
+            }
+        },
+        failure: function (data) {
+            alert(data.responseText);
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 $("#btnSearchCities").click(function () {
     var city = $('#searchCityInput').val();
@@ -161,6 +218,10 @@ $(".clear-results").click(function () {
     $('#neighborhood').show();
 });
 
+$(".close-login").click(function () {
+    document.location.href = '/';
+});
+
 $(".asc").click(function () {
     $('.asc').toggleClass('selected');
     $('.dsc').removeClass('selected');
@@ -219,7 +280,7 @@ $("#btnSearch").click(function () {
                     }
                    
                     restaurants.append(
-                        '<h3 class="card-header"><a class="restaurant-details" id="' + data.restaurants[i].restaurant.id + '" data-toggle="modal" data-target="#resDetailModal">' + data.restaurants[i].restaurant.name + '</a></h3>' +
+                        '<div class="card mb-3 pt-1"><h3 class="card-header"><a class="restaurant-details" id="' + data.restaurants[i].restaurant.id + '" data-toggle="modal" data-target="#resDetailModal">' + data.restaurants[i].restaurant.name + '</a></h3>' +
                         '<div class="card-body">' +
                     
                         '<h5 class="card-title">Rating: ' + data.restaurants[i].restaurant.user_rating.aggregate_rating + ' of 5</h5>' +
@@ -238,7 +299,7 @@ $("#btnSearch").click(function () {
                         '</div>' +
                         '<div class="card-footer mb-5"><i class="fas fa-map-signs"></i> ' +
                             dist + ' Miles' +
-                        '</div>');
+                        '</div></div>');
                     i++;
                 });
 
@@ -249,80 +310,6 @@ $("#btnSearch").click(function () {
     setTimeout(function () {
         $('#viewNext').removeClass('hidden');
     }, 2000)
-});
-
-$("#viewNext").click(function () {
-    var start = $('.card-footer-h:last').text();
-    start = parseInt(start);
-    start++;
-    var count = 20;
-    var index = $('.card-footer-h:last').text();
-    index = parseInt(index);
-    index++;
-    var q = $('#searchInput').val();
-    $('.icon-wrapper').hide();
-    var distance = $('#distance').val();
-    var sort = $('#sort').val();
-    var order = '';
-    if ($('.asc').hasClass('selected')) {
-        order = 'asc';
-    }
-    else if ($('.dsc').hasClass('selected')) {
-        order = 'desc';
-    }
-    else {
-        order = '';
-    }
-    var ulCities = $('#ulCities');
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(latsAndLons);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-    function latsAndLons(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        var restaurants = $('#restaurants');
-        $.ajax({
-            type: 'GET',
-            url: 'https://developers.zomato.com/api/v2.1/search?q=' + q + '&start=' + start + '&count=' + count + '&lat=' + latitude + '&lon=' + longitude + '&radius=' + distance + '&sort=' + sort + '&order=' + order + '&apikey=8e433de61020f20ecdcc1389db0f22a4',
-            dataType: 'json',
-            data: JSON.stringify(),
-            success: function (data) {
-                
-                var i = 0;
-                $.each(data.restaurants, function (key, val) {
-
-                    restaurants.append(
-                        '<h3 class="card-header">' + data.restaurants[i].restaurant.name + '</h3>' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title">Rating: ' + data.restaurants[i].restaurant.user_rating.aggregate_rating + '</h5>' +
-                        '<h6 class="card-subtitle text-muted">' + data.restaurants[i].restaurant.cuisines + '</h6>' +
-                        '</div>' +
-                        '<svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">' +
-                        '<rect width="100%" height="100%" fill="#868e96"></rect>' +
-                        '<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>' +
-                        '</svg>' +
-                        '<div class="card-body">' +
-                        '<p class="card-text">' + data.restaurants[i].restaurant.highlights + '</p>' +
-                        '</div>' +
-                        '<ul class="list-group list-group-flush">' +
-                        '<li class="list-group-item"><i class="fas fa-location-arrow"></i> ' + data.restaurants[i].restaurant.location.address + '</li>' +
-                        '<li class="list-group-item"><i class="fas fa-cocktail"></i> ' + data.restaurants[i].restaurant.timings + '</li>' +
-                        '<li class="list-group-item"><i class="fas fa-phone-square"></i> ' + data.restaurants[i].restaurant.phone_numbers + '</li>' +
-                        '</ul>' +
-                        '<div class="card-body">' +
-                        '<a href="' + data.restaurants[i].restaurant.menu_url + '" class="card-link" target="_blank">View Menu</a>' +
-                        '</div>' +
-                        '<div class="card-footer mb-5">' +
-                            index +
-                        '</div>');
-                    i++;
-                    index++;
-                });
-            }
-        });
-    }
 });
 
 $(document).on("click", ".restaurant-details", function (e) {
@@ -436,3 +423,14 @@ function calcDistance(lat1, lon1, lat2, lon2, unit) {
     if (unit == "M") { dist = dist.toFixed(2); }
     return dist;
 }
+
+function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+};

@@ -17,15 +17,219 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\css\elegant-icons.css" />
+    <Content Remove="wwwroot\css\font-awesome.min.css" />
+    <Content Remove="wwwroot\css\owl.carousel.min.css" />
+    <Content Remove="wwwroot\css\slicknav.min.css" />
+    <Content Remove="wwwroot\css\style.css" />
+    <Content Remove="wwwroot\fonts\ElegantIcons.eot" />
+    <Content Remove="wwwroot\fonts\ElegantIcons.svg" />
+    <Content Remove="wwwroot\fonts\ElegantIcons.ttf" />
+    <Content Remove="wwwroot\fonts\ElegantIcons.woff" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont.eot" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont.svg" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont.woff" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <Content Remove="wwwroot\fonts\FontAwesome.otf" />
+    <Content Remove="wwwroot\img\about\about-1.jpg" />
+    <Content Remove="wwwroot\img\about\about-2.jpg" />
+    <Content Remove="wwwroot\img\about\about-3.jpg" />
+    <Content Remove="wwwroot\img\categories\cat-1.jpg" />
+    <Content Remove="wwwroot\img\categories\cat-2.jpg" />
+    <Content Remove="wwwroot\img\categories\cat-3.jpg" />
+    <Content Remove="wwwroot\img\categories\cat-4.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-1.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-2.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-3.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-4.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-5.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-6.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-list\cl-7.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-1.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-2.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-3.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-4.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-5.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-6.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-7.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\cp-8.jpg" />
+    <Content Remove="wwwroot\img\categories\categories-post\quote.png" />
+    <Content Remove="wwwroot\img\categories\single-post\author-profile.jpg" />
+    <Content Remove="wwwroot\img\categories\single-post\comment\comment-1.jpg" />
+    <Content Remove="wwwroot\img\categories\single-post\comment\comment-2.jpg" />
+    <Content Remove="wwwroot\img\categories\single-post\comment\comment-3.jpg" />
+    <Content Remove="wwwroot\img\categories\single-post\quote-left.png" />
+    <Content Remove="wwwroot\img\categories\single-post\single-post-desc.jpg" />
+    <Content Remove="wwwroot\img\categories\single-post\single-post-hero.jpg" />
+    <Content Remove="wwwroot\img\footer\instagram-avatar.jpg" />
+    <Content Remove="wwwroot\img\footer\ip-1.jpg" />
+    <Content Remove="wwwroot\img\footer\ip-2.jpg" />
+    <Content Remove="wwwroot\img\footer\ip-3.jpg" />
+    <Content Remove="wwwroot\img\footer\ip-4.jpg" />
+    <Content Remove="wwwroot\img\footer\ip-5.jpg" />
+    <Content Remove="wwwroot\img\footer\ip-6.jpg" />
+    <Content Remove="wwwroot\img\hero\hero-1.jpg" />
+    <Content Remove="wwwroot\img\hero\hero-2.jpg" />
+    <Content Remove="wwwroot\img\hero\hero-3.jpg" />
+    <Content Remove="wwwroot\img\hero\hero-4.jpg" />
+    <Content Remove="wwwroot\img\humberger\humberger-about.jpg" />
+    <Content Remove="wwwroot\img\humberger\humberger-logo.png" />
+    <Content Remove="wwwroot\img\logo.png" />
+    <Content Remove="wwwroot\img\megamenu\p-1.jpg" />
+    <Content Remove="wwwroot\img\megamenu\p-2.jpg" />
+    <Content Remove="wwwroot\img\megamenu\p-3.jpg" />
+    <Content Remove="wwwroot\img\megamenu\p-4.jpg" />
+    <Content Remove="wwwroot\img\megamenu\p-5.jpg" />
+    <Content Remove="wwwroot\img\sidebar\banner.jpg" />
+    <Content Remove="wwwroot\img\sidebar\feature-post.jpg" />
+    <Content Remove="wwwroot\img\sidebar\sidebar-about.jpg" />
+    <Content Remove="wwwroot\img\siign-in-logo.png" />
+    <Content Remove="wwwroot\img\typography.jpg" />
+    <Content Remove="wwwroot\sass\style.scss" />
+    <Content Remove="wwwroot\sass\_404.scss" />
+    <Content Remove="wwwroot\sass\_about-page.scss" />
+    <Content Remove="wwwroot\sass\_base.scss" />
+    <Content Remove="wwwroot\sass\_categories.scss" />
+    <Content Remove="wwwroot\sass\_contact.scss" />
+    <Content Remove="wwwroot\sass\_footer.scss" />
+    <Content Remove="wwwroot\sass\_header.scss" />
+    <Content Remove="wwwroot\sass\_hero.scss" />
+    <Content Remove="wwwroot\sass\_mixins.scss" />
+    <Content Remove="wwwroot\sass\_responsive.scss" />
+    <Content Remove="wwwroot\sass\_sidebar.scss" />
+    <Content Remove="wwwroot\sass\_signin.scss" />
+    <Content Remove="wwwroot\sass\_single-post.scss" />
+    <Content Remove="wwwroot\sass\_typography.scss" />
+    <Content Remove="wwwroot\sass\_variable.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="foodeiblog-master\js\matchHeight.js" />
+    <None Remove="foodeiblog-master\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="foodeiblog-master\js\matchHeight.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="foodeiblog-master\js\site.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\elegant-icons.css" />
+    <None Include="wwwroot\css\font-awesome.min.css" />
+    <None Include="wwwroot\css\owl.carousel.min.css" />
+    <None Include="wwwroot\css\slicknav.min.css" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\fonts\ElegantIcons.eot" />
+    <None Include="wwwroot\fonts\ElegantIcons.svg" />
+    <None Include="wwwroot\fonts\ElegantIcons.ttf" />
+    <None Include="wwwroot\fonts\ElegantIcons.woff" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\img\about\about-1.jpg" />
+    <None Include="wwwroot\img\about\about-2.jpg" />
+    <None Include="wwwroot\img\about\about-3.jpg" />
+    <None Include="wwwroot\img\categories\cat-1.jpg" />
+    <None Include="wwwroot\img\categories\cat-2.jpg" />
+    <None Include="wwwroot\img\categories\cat-3.jpg" />
+    <None Include="wwwroot\img\categories\cat-4.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-1.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-2.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-3.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-4.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-5.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-6.jpg" />
+    <None Include="wwwroot\img\categories\categories-list\cl-7.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-1.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-2.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-3.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-4.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-5.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-6.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-7.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\cp-8.jpg" />
+    <None Include="wwwroot\img\categories\categories-post\quote.png" />
+    <None Include="wwwroot\img\categories\single-post\author-profile.jpg" />
+    <None Include="wwwroot\img\categories\single-post\comment\comment-1.jpg" />
+    <None Include="wwwroot\img\categories\single-post\comment\comment-2.jpg" />
+    <None Include="wwwroot\img\categories\single-post\comment\comment-3.jpg" />
+    <None Include="wwwroot\img\categories\single-post\quote-left.png" />
+    <None Include="wwwroot\img\categories\single-post\single-post-desc.jpg" />
+    <None Include="wwwroot\img\categories\single-post\single-post-hero.jpg" />
+    <None Include="wwwroot\img\footer\instagram-avatar.jpg" />
+    <None Include="wwwroot\img\footer\ip-1.jpg" />
+    <None Include="wwwroot\img\footer\ip-2.jpg" />
+    <None Include="wwwroot\img\footer\ip-3.jpg" />
+    <None Include="wwwroot\img\footer\ip-4.jpg" />
+    <None Include="wwwroot\img\footer\ip-5.jpg" />
+    <None Include="wwwroot\img\footer\ip-6.jpg" />
+    <None Include="wwwroot\img\hero\hero-1.jpg" />
+    <None Include="wwwroot\img\hero\hero-2.jpg" />
+    <None Include="wwwroot\img\hero\hero-3.jpg" />
+    <None Include="wwwroot\img\hero\hero-4.jpg" />
+    <None Include="wwwroot\img\humberger\humberger-about.jpg" />
+    <None Include="wwwroot\img\humberger\humberger-logo.png" />
+    <None Include="wwwroot\img\logo.png" />
+    <None Include="wwwroot\img\megamenu\p-1.jpg" />
+    <None Include="wwwroot\img\megamenu\p-2.jpg" />
+    <None Include="wwwroot\img\megamenu\p-3.jpg" />
+    <None Include="wwwroot\img\megamenu\p-4.jpg" />
+    <None Include="wwwroot\img\megamenu\p-5.jpg" />
+    <None Include="wwwroot\img\sidebar\banner.jpg" />
+    <None Include="wwwroot\img\sidebar\feature-post.jpg" />
+    <None Include="wwwroot\img\sidebar\sidebar-about.jpg" />
+    <None Include="wwwroot\img\siign-in-logo.png" />
+    <None Include="wwwroot\img\typography.jpg" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\jquery-3.3.1.min.js" />
+    <None Include="wwwroot\js\jquery.slicknav.js" />
+    <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\js\owl.carousel.min.js" />
+    <None Include="wwwroot\sass\style.scss" />
+    <None Include="wwwroot\sass\_404.scss" />
+    <None Include="wwwroot\sass\_about-page.scss" />
+    <None Include="wwwroot\sass\_base.scss" />
+    <None Include="wwwroot\sass\_categories.scss" />
+    <None Include="wwwroot\sass\_contact.scss" />
+    <None Include="wwwroot\sass\_footer.scss" />
+    <None Include="wwwroot\sass\_header.scss" />
+    <None Include="wwwroot\sass\_hero.scss" />
+    <None Include="wwwroot\sass\_mixins.scss" />
+    <None Include="wwwroot\sass\_responsive.scss" />
+    <None Include="wwwroot\sass\_sidebar.scss" />
+    <None Include="wwwroot\sass\_signin.scss" />
+    <None Include="wwwroot\sass\_single-post.scss" />
+    <None Include="wwwroot\sass\_typography.scss" />
+    <None Include="wwwroot\sass\_variable.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Spotify" Version="5.0.0" />
+    <PackageReference Include="FreeGeoIPCore" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.Azure.Signalr" Version="1.6.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
     <PackageReference Include="Reddit" Version="1.4.0" />
     <PackageReference Include="SendGrid" Version="9.22.0" />
+    <PackageReference Include="SpotifyAPI.Web" Version="6.0.0" />
+    <PackageReference Include="SpotifyAPI.Web.Auth" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

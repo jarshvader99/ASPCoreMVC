@@ -3,48 +3,289 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Foodly</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lux.css" />
+    <title>Foodly</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Unna:400,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lux.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <script src="https://kit.fontawesome.com/ee841920d7.js" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/ee841920d7.js" crossorigin="anonymous"></script>*@
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Foodly</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-hamburger ham-burger"></i>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="/"><img src="~/img/humberger/humberger-logo.png" alt=""></a>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Home/Collections">Collections</a></li>
+                <li><a href="#">Dinner</a></li>
+                <li><a href="#">Desserts</a></li>
+                <li class="dropdown">
+                    <a href="#">Pages</a>
+                    <ul class="dropdown__menu">
+                        <li><a href="./categories-grid.html">Categories Grid</a></li>
+                        <li><a href="./categories-list.html">Categories List</a></li>
+                        <li><a href="./single-post.html">Single Post</a></li>
+                        <li><a href="./signin.html">Sign In</a></li>
+                        <li><a href="./404.html">404</a></li>
+                        <li><a href="./typography.html">Typography</a></li>
                     </ul>
-                    <partial name="_LoginPartial" />
+                </li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <partial name="_LoginPartial" />
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="humberger__menu__subscribe">
+            <p>Sign up below to receive future communications from us.</p>
+            <form action="#">
+                <input type="text" class="email-input" placeholder="Email">
+                <label for="agree-check">
+                    I agree to the terms & conditions
+                    <input type="checkbox" id="agree-check">
+                    <span class="checkmark"></span>
+                </label>
+                <button type="submit" class="site-btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-1 col-6 order-md-1 order-1">
+                        <div class="header__humberger">
+                            <i class="fa fa-bars humberger__open"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-10 order-md-2 order-3">
+                        <nav class="header__menu">
+                            <ul>
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/Identity/Account/Login">Login</a></li>
+                                <li><a href="/Home/Collections">Collections</a></li>
+                                <li><a href="#">Desserts</a></li>
+                                <li class="dropdown">
+                                    <a href="#">Pages</a>
+                                    <ul class="dropdown__menu">
+                                        <li><a href="./categories-grid.html">Categories Grid</a></li>
+                                        <li><a href="./categories-list.html">Categories List</a></li>
+                                        <li><a href="./single-post.html">Single Post</a></li>
+                                        <li><a href="./signin.html">Sign In</a></li>
+                                        <li><a href="./404.html">404</a></li>
+                                        <li><a href="./typography.html">Typography</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./about.html">About</a></li>
+                                <li><a href="./contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-2 col-md-1 col-6 order-md-3 order-2">
+                        <div class="header__search">
+                            <i class="fa fa-search search-switch"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__btn">
+                        <a href="./signin.html" class="primary-btn">Subscribe</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__logo">
+                        <a href="/"><img src="~/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
+    <!-- Header Section End -->
+    @*<header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Foodly</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-hamburger ham-burger"></i>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+        </header>*@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="footer__instagram">
+                <div class="footer__instagram__avatar">
+                    <div class="footer__instagram__avatar--pic">
+                        <img src="~/img/footer/instagram-avatar.jpg" alt="">
+                    </div>
+                    <div class="footer__instagram__avatar--text">
+                        <h5>Foodly</h5>
+                        <span>23,7k follower</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+                        <div class="footer__instagram__item set-bg"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+                        <div class="footer__instagram__item set-bg" data-setbg="~/img/footer/ip-2.jpg"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+                        <div class="footer__instagram__item set-bg" data-setbg="~/img/footer/ip-3.jpg"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+                        <div class="footer__instagram__item set-bg" data-setbg="~/img/footer/ip-4.jpg"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+                        <div class="footer__instagram__item set-bg" data-setbg="~/img/footer/ip-5.jpg"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+                        <div class="footer__instagram__item set-bg" data-setbg="~/img/footer/ip-6.jpg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
-            &copy; 2020 - Foodly - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__text">
+                        <div class="footer__logo">
+                            <a href="#"><img src="~/img/logo.png" alt=""></a>
+                        </div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut<br /> labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus
+                            commodo viverra<br /> maecenas accumsan lacus vel facilisis.
+                        </p>
+                        <div class="footer__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer__copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer Section End -->
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form" action="/Home/Search">
+                <input type="text" name="q" id="search-input" placeholder="Search here.....">
+                <input type="submit" />
+                <div class="p-1 d-flex">
+                    <fieldset>
+                        <div class="form-group">
+                            <select id="distance" name="distance" class="custom-select">
+                                <option value="1610" selected="">- Search Radius -</option>
+                                <option value="1610">1 Mile</option>
+                                <option value="4828">3 Miles</option>
+                                <option value="8046">5 Miles</option>
+                                <option value="16093">10 Miles</option>
+                                <option value="32186">20 Miles</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group ml-1">
+                            <select id="sort" name="sort" class="custom-select">
+                                <option value="" selected="">- Sort -</option>
+                                <option value="cost">Price</option>
+                                <option value="rating">Rating</option>
+                                <option value="real_distance">Distance</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <div class="form-group ml-1 d-flex align-items-center">
+                        <select id="order" name="order" class="custom-select">
+                            <option value="desc">Desc</option>
+                            <option value="asc">Asc</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; @DateTime.Now.Year Foodly
+            </div>
+        </footer>*@
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+    <!-- Js Plugins -->
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

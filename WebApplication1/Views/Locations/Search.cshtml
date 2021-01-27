@@ -1,0 +1,31 @@
+﻿@model WebApplication1.Models.Locations.LocationsModel;
+
+<section>
+    @if (Model != null)
+    {
+        <div class="categories__post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            @foreach (var item in Model.location_suggestions)
+                            {
+                                <div id="restaurant-card" class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="categories__post__item">
+                                        <div class="categories__post__item__pic small__item set-bg">
+                                        </div>
+                                        <div class="categories__post__item__text">
+                                            <h3><a href="/Locations/LocationDetails?entity_id=@item.entity_id&entity_type=@item.entity_type">@item.city_name, @item.country_name</a></h3>
+                                            <p class="post__label">@item.title</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+

@@ -1,22 +1,202 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#btnGetCities').click(function () {
-            var location = getLocation();          
-            getCityFromLatAndLon();            
-        });
-        $('#btnClear').click(function () {
-            ulCities.empty();
-        });
-    });
-</script>
+﻿@model WebApplication1.Models.Rootobject;
+
+<div class="modal" id="locationModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Share Location?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="">
+                <p id="">Foodly would like to know your location to show nearby restaurants.</p>
+                <div id=""></div>
+            </div>
+            <div class="modal-footer" id="back-to-restaurant">
+                <button id="show-res" class="site-btn">Show Restaurants</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hero Section Begin -->
+<section class="hero">
+    <div class="hero__slider owl-carousel">
+        <div class="hero__item">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <div class="hero__inside__item hero__inside__item--wide set-bg"
+                             data-setbg="img/hero/hero-1.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h4>
+                                        Vegan White Peach Mug Cobbler With CardamomVegan<br /> White Peach Mug
+                                        Cobbler With Cardamom
+                                    </h4>
+                                    <ul class="widget">
+                                        <li>by <span>Admin</span></li>
+                                        <li>3 min read</li>
+                                        <li>20 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6  p-0">
+                        <div class="hero__inside__item hero__inside__item--small set-bg"
+                             data-setbg="img/hero/hero-2.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h5>How to Make a Milkshake With Any <br />Ice Cream, Any Toppings...</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero__inside__item hero__inside__item--small set-bg"
+                             data-setbg="img/hero/hero-3.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h5>Vintage Copper Preserve Pan with <br />Brass Handles, Mid 19th Century</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6  p-0">
+                        <div class="hero__inside__item set-bg" data-setbg="img/hero/hero-4.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h5>Marinated Lentil Salad with Zucch <br />ini and Tomatoes</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero__item">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <div class="hero__inside__item hero__inside__item--wide set-bg"
+                             data-setbg="img/hero/hero-1.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h4>
+                                        Vegan White Peach Mug Cobbler With CardamomVegan<br /> White Peach Mug
+                                        Cobbler With Cardamom
+                                    </h4>
+                                    <ul class="widget">
+                                        <li>by <span>Admin</span></li>
+                                        <li>3 min read</li>
+                                        <li>20 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 p-0">
+                        <div class="hero__inside__item hero__inside__item--small set-bg"
+                             data-setbg="img/hero/hero-3.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h5>How to Make a Milkshake With Any <br />Ice Cream, Any Toppings...</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero__inside__item hero__inside__item--small set-bg"
+                             data-setbg="img/hero/hero-2.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h5>Vintage Copper Preserve Pan with <br />Brass Handles, Mid 19th Century</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 p-0">
+                        <div class="hero__inside__item set-bg" data-setbg="img/hero/hero-4.jpg">
+                            <div class="hero__inside__item__text">
+                                <div class="hero__inside__item--meta">
+                                    <span>08</span>
+                                    <p>Aug</p>
+                                </div>
+                                <div class="hero__inside__item--text">
+                                    <ul class="label">
+                                        <li>Vegan</li>
+                                        <li>Desserts</li>
+                                    </ul>
+                                    <h5>Marinated Lentil Salad with Zucch <br />ini and Tomatoes</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
 <div>
     <div class="p-1 d-flex">
         <input type="text" id="searchInput" class="form-control justify-content-start" placeholder="Search for eats.."><i class="fas fa-times clear-results"></i>
-        <i id="searchIcon" class='fas fa-search'></i><input id="btnSearch" class="btn btn-info justify-content-end" type="button" value="" /> 
+        <i id="searchIcon" class='fas fa-search'></i><input id="btnSearch" class="btn btn-info justify-content-end" type="button" value="" />
     </div>
     <div class="p-1 d-flex">
         <fieldset>
@@ -48,13 +228,20 @@
     </div>
 </div>
 
-<div id="neighborhood" class="card mb-3 pt-1">
-    
-</div>
+<div class="container">
+    <div class="row">
+        <div id="neighborhood" class="card-columns">
 
-<div id="restaurants" class="card mb-3 pt-1">
-    <div class="icon-wrapper d-flex justify-content-center align-items-center">
-        <i class="fas fa-utensils fa-9x search-icon"></i>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div id="restaurants" class="card col-md-4 mb-3 pt-1">
+            <div class="icon-wrapper d-flex justify-content-center align-items-center">
+                <i class="fas fa-utensils fa-9x search-icon"></i>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -74,7 +261,7 @@
                 <p id="thumb"></p>
             </div>
             <div class="modal-footer modal-footer-details">
-                
+
             </div>
         </div>
     </div>

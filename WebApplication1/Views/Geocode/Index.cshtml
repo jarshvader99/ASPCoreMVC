@@ -1,0 +1,78 @@
+﻿@model WebApplication1.Models.Geocode.GeocodeModel;
+
+<section>
+    @if (Model != null)
+    {
+        <div class="categories__post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        @if (Model.nearby_restaurants != null)
+                        {
+                            <div class="row">
+                                @foreach (var item in Model.nearby_restaurants)
+                                {
+                                    var image = "";
+                                    @if (item.restaurant.featured_image != "")
+                                    {
+                                        image = item.restaurant.featured_image;
+                                    }
+                                    else
+                                    {
+                                        image = "https://via.placeholder.com/380x253.png?text=Oops!+There+Is+Nothing+Here.";
+                                    }
+                                    var price = item.restaurant.price_range.ToString();
+                                    @switch (price)
+                                    {
+                                        case "1":
+                                            // code block
+                                            price = "$";
+                                            break;
+                                        case "2":
+                                            // code block
+                                            price = "$$";
+                                            break;
+                                        case "3":
+                                            // code block
+                                            price = "$$$";
+                                            break;
+                                        case "4":
+                                            // code block
+                                            price = "$$$$";
+                                            break;
+                                        default:
+                                            // code block
+                                            price = "$";
+                                            break;
+                                    }
+                                    <div id="restaurant-card" class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="categories__post__item">
+                                            <div class="categories__post__item__pic small__item set-bg"
+                                                 data-setbg=@image>
+                                                <div class="post__meta">
+                                                    <span class="rating">Price</span>
+                                                    <h4>@price</h4>
+                                                    <span class="rating">Rating</span>
+                                                    <h4>@item.restaurant.user_rating.aggregate_rating</h4>
+                                                </div>
+                                            </div>
+                                            <div class="categories__post__item__text">
+                                                <h3><a href=@item.restaurant.url>@item.restaurant.name</a></h3>
+                                                <p class="post__label">@item.restaurant.cuisines</p>
+                                                <p class="text-left"><i class="fa fa-book"></i> <a href="@item.restaurant.menu_url">Menu</a></p>
+                                                
+                                                <p class="text-left"><i class="fa fa-address-book"></i> @item.restaurant.location.address</p>
+                                                <p class="text-left"><i class=" fa fa-map-signs"></i> @item.restaurant.location.city</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
